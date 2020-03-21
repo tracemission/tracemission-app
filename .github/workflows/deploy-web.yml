@@ -5,7 +5,7 @@ on:
       - master
 jobs:
   build:
-    name: Build Android App
+    name: Build and Deploy Web App
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -22,7 +22,7 @@ jobs:
           source: web-build
           target: web-build-${{ github.run_id }}
           host: ${{ secrets.SSH_HOST }}
-          user: ${{ secrets.SSH_USERNAME }}
+          username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
       - uses: appleboy/ssh-action@master
