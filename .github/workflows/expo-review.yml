@@ -20,4 +20,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          msg: App is ready for review, you can [see it here](https://expo.io/tracemission/use-expo?release-channel=pr-${{ github.event.number }}).
+          msg: App is ready for review, you can [see it here](https://exp.host/@${{ secrets.EXPO_USERNAME }}/store?release-channel=pr-${{ github.event.number }}).
