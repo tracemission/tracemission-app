@@ -17,10 +17,10 @@ jobs:
           expo-version: 3.x
       - run: yarn install
       - run: expo build:web
-      - uses: horochx/deploy-via-scp@v1.0.1
+      - uses: appleboy/scp-action@master
         with:
-          local: web-build
-          remote: web-build-${{ github.run_id }}
+          source: web-build
+          target: web-build-${{ github.run_id }}
           host: ${{ secrets.SSH_HOST }}
           user: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
