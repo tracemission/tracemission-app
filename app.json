@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "tracemission",
-    "slug": "store",
+    "slug": "customer",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -24,7 +24,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "app.tracemission.customer",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "app.tracemission.customer",
+      "versionCode": 1
     }
   }
 }
