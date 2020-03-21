@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import StayRegister from './StayRegister';
+import ActionButtons from './ActionButtons';
 import IncidentList from './IncidentList';
 import CurrentTracking from './CurrentTracking';
 import Scanner from '../tracker/Scanner';
@@ -8,7 +8,7 @@ import Scanner from '../tracker/Scanner';
 const Dashboard = props => {
   const { navigate } = props;
   const [scannerStarted, setScannerStarted] = useState(false);
-  const [scannedId, setScannedId] = useState();
+  const [scannedId, setScannedId] = useState(false);
 
   return (
     <View style={StyleSheet.absoluteFillObject}>
@@ -24,18 +24,28 @@ const Dashboard = props => {
           />
         </View>
       ) : (
-        <View>
-          <Text>Hallo _Vorname_</Text>
+        <View style={styles.container}>
+          <Text style={{fontWeight: 'bold', fontSize: 30}}>Hallo _Vorname_</Text>
           {scannedId ? (
             <CurrentTracking />
           ) : (
-            <StayRegister setScannerStarted={setScannerStarted} />
+            <ActionButtons setScannerStarted={setScannerStarted}/>
           )}
+          <CurrentTracking />
           <IncidentList />
         </View>
       )}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      paddingHorizontal: 10,
+      marginVertical: 30,
+      width: '100%'
+    }
+  });
 
 export default Dashboard;
