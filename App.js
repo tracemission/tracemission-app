@@ -1,19 +1,26 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import * as Font from 'expo-font';
+import MainContainer from './src/components/main/MainContainer';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
-}
+const App = () => {
+  const [ready, setReady] = useState(false);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  useEffect(() => {
+    asyncInit().then(() => {
+      setReady(true);
+    });
+  });
+
+  return ready ? <MainContainer /> : null;
+};
+
+const asyncInit = async () => {
+  await Promise.all([
+    Font.loadAsync({
+      'roboto-light': require('./assets/fonts/Roboto-Light.ttf')
+    })
+  ]);
+  return Promise.resolve();
+};
+
+export default App;
