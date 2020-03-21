@@ -4,17 +4,24 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Registration from '../registration/Registration';
 import Landing from '../registration/Landing';
 import Dashboard from '../dashboard/Dashboard';
+import Verification from '../registration/Verification';
+import { Button } from 'react-native-material-ui';
+import { clearItem } from '../../util/StorageService';
 
-const MainContainer = () => {
-  const [view, setView] = useState('landing');
+const MainContainer = props => {
+  const { userId, token, setUserId, setToken } = props;
+  const [view, setView] = useState(
+    token ? 'dashboard' : userId ? 'verification' : 'landing'
+  );
   const navigate = destination => {
     setView(destination);
   };
 
   const viewComponent = {
     landing: <Landing navigate={navigate} />,
-    registration: <Registration navigate={navigate} />,
-    dashboard: <Dashboard navigate={navigate} />
+    registration: <Registration navigate={navigate} setUserId={setUserId} />,
+    dashboard: <Dashboard navigate={navigate} userId={userId} token={token} />,
+    verification: <Verification navigate={navigate} userId={userId} />
   }[view];
 
   return (
@@ -27,6 +34,12 @@ const MainContainer = () => {
       >
         {viewComponent}
       </LinearGradient>
+      <Button
+        onPress={() => {
+          clearItem('userId');
+        }}
+        text={'[DEV] Clear storage'}
+      />
     </View>
   );
 };
