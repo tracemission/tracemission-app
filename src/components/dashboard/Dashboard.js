@@ -31,6 +31,7 @@ const Dashboard = props => {
           ) : (
             <ActionButtons setScannerStarted={setScannerStarted}/>
           )}
+          <CurrentTracking />
           <IncidentList />
         </View>
       )}
