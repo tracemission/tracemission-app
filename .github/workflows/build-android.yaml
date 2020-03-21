@@ -1,8 +1,7 @@
 name: Build Android App (Expo)
 on:
-  push:
-    branches:
-      - master
+  schedule:
+    - cron: 55 * * * *
 jobs:
   publish:
     name: Build Android App
