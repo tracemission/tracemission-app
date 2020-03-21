@@ -2,99 +2,194 @@ import React from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import i18n from '../../util/i18n';
 
 export default class Scanner extends React.Component {
-  state = {
-    hasPermission: null,
-    value: null
-  };
+  
+    static navigationOptions = {
+      headerShown: false,
+    };
 
-  componentDidMount() {
-    this.requestCameraPermission();
-  }
-
-  async requestCameraPermission() {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasPermission: status === 'granted' });
-  }
-
-  render() {
-    const { hasPermission, value } = this.state;
-    if (hasPermission === null) {
-      return (
-        <Text>We need your permission to access the camera to scan codes.</Text>
-      );
-    } else if (hasPermission === false) {
-      return (
-        <Text>
-          Please go to your device settings to your device settings and grant
-          Camera permissions to this app.
-        </Text>
-      );
-    } else {
-      return (
-        <BarCodeScanner
-          onBarCodeScanned={value ? undefined : this.handleBarCodeScanned}
-          style={[StyleSheet.absoluteFill, styles.container]}
-        >
-          <Text style={styles.description}>Scan your QR code</Text>
-          <View style={styles.layerTop} />
-          <View style={styles.layerCenter}>
-            <View style={styles.layerLeft} />
-            <View style={styles.focused} />
-            <View style={styles.layerRight} />
-          </View>
-          <View style={styles.layerBottom} />
-        </BarCodeScanner>
-      );
+    state = {
+        hasPermission: null,
+        value: null,
     }
-  }
 
-  handleBarCodeScanned = ({ type, data }) => {
-    this.setState({
-      value: data
-    });
-    if (this.props.onScanned) {
-      this.props.onScanned(data);
+    _isMounted = false;
+
+    componentDidMount() {
+      _isMounted = true;
+      this.setState({ value: null, });
+      this.requestCameraPermission();
     }
-  };
+
+    componentWillUnmount() {
+      this._isMounted = false;
+    }
+
+    async requestCameraPermission() {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA);
+      this.setState({ hasPermission: status === 'granted' });
+    }
+
+    render(){
+        const { hasPermission, value } = this.state
+        if (hasPermission === null) {
+            return (
+              <Text>{i18n.t('SCANNER.GIVE_PERMISSION', { title: i18n.t('TITLE') })}</Text>
+            );
+        } else if (hasPermission === false) {
+            return (
+              <Text>
+                {i18n.t('SCANNER.GRANT_PERMISSION_IN_SETTINGS', { title: i18n.t('TITLE') })}
+              </Text>
+            );
+        } else {
+            return (
+              <View style={styles.container}>
+                <BarCodeScanner
+                    onBarCodeScanned={value ? undefined : this.handleBarCodeScanned}
+                    style={StyleSheet.absoluteFill}
+                />
+
+                <View style={styles.topOverlay} />
+                <View style={styles.leftOverlay} />
+                <View style={styles.rightOverlay} />
+                <View style={styles.bottomOverlay} />
+                <View style={styles.topLeftCorner} />
+                <View style={styles.topRightCorner} />
+                <View style={styles.bottomLeftCorner} />
+                <View style={styles.bottomRightCorner} />
+
+                <View style={styles.header}>
+                  <Text style={styles.headerText}>{i18n.t('SCANNER.SCAN_LOCATION')}</Text>
+                </View>
+
+                <View style={styles.footer}>
+                </View>
+              </View>
+            );
+        }
+    }
+
+    handleBarCodeScanned = ({
+      type,
+      data
+    }) => {
+      const match = data.match(new RegExp(process.env.QR_CODE_PATTERN));
+      if (match && ['id'].map((key) => key in match.groups).every(Boolean)) {
+        this.setState({
+          value: match,
+        });
+        if (this.props.onScanned) {
+          this.props.onScanned({ ...match.groups, data, type, });
+        }
+      }
+    };
 }
 
-const opacity = 'rgba(0, 0, 0, .6)';
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
+
+const BOX_MARGIN = 30;
+const BOX_SIZE = width - BOX_MARGIN * 2;
+const BOX_TOP = height / 2 - BOX_SIZE / 2;
+const BOX_BOTTOM = BOX_TOP + BOX_SIZE;
+const BOX_LEFT = BOX_MARGIN;
+const BOX_RIGHT = width - BOX_LEFT;
+
+const overlayBaseStyle = {
+  position: 'absolute',
+  backgroundColor: 'rgba(0,0,0,0.6)',
+};
+
+const cornerBaseStyle = {
+  position: 'absolute',
+  borderColor: '#fff',
+  backgroundColor: 'transparent',
+  borderWidth: 2,
+  width: 10,
+  height: 10,
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column'
+    backgroundColor: '#000',
   },
-  layerTop: {
-    flex: 2,
-    backgroundColor: opacity
+  topLeftCorner: {
+    ...cornerBaseStyle,
+    top: BOX_TOP - 1,
+    left: BOX_MARGIN - 1,
+    borderBottomWidth: 0,
+    borderRightWidth: 0,
   },
-  layerCenter: {
-    flex: 3,
-    flexDirection: 'row'
+  topRightCorner: {
+    ...cornerBaseStyle,
+    top: BOX_TOP - 1,
+    right: BOX_MARGIN - 1,
+    borderBottomWidth: 0,
+    borderLeftWidth: 0,
   },
-  layerLeft: {
-    flex: 1,
-    backgroundColor: opacity
+  bottomLeftCorner: {
+    ...cornerBaseStyle,
+    bottom: height - BOX_BOTTOM - 1,
+    left: BOX_MARGIN - 1,
+    borderTopWidth: 0,
+    borderRightWidth: 0,
   },
-  focused: {
-    flex: 10
+  bottomRightCorner: {
+    ...cornerBaseStyle,
+    bottom: height - BOX_BOTTOM - 1,
+    right: BOX_MARGIN - 1,
+    borderTopWidth: 0,
+    borderLeftWidth: 0,
   },
-  layerRight: {
-    flex: 1,
-    backgroundColor: opacity
+  topOverlay: {
+    ...overlayBaseStyle,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: height - BOX_TOP,
   },
-  layerBottom: {
-    flex: 2,
-    backgroundColor: opacity
+  leftOverlay: {
+    ...overlayBaseStyle,
+    top: BOX_TOP,
+    left: 0,
+    right: BOX_RIGHT,
+    bottom: height - BOX_BOTTOM,
   },
-  description: {
-    fontSize: width * 0.09,
-    marginTop: '10%',
-    textAlign: 'center',
-    color: 'white',
-    backgroundColor: opacity
-  }
+  rightOverlay: {
+    ...overlayBaseStyle,
+    top: BOX_TOP,
+    left: BOX_RIGHT,
+    right: 0,
+    bottom: height - BOX_BOTTOM,
+  },
+  bottomOverlay: {
+    ...overlayBaseStyle,
+    top: BOX_BOTTOM,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  header: {
+    position: 'absolute',
+    top: 40,
+    right: 0,
+    alignItems: 'flex-start',
+    left: 25,
+  },
+  headerText: {
+    color: '#fff',
+    backgroundColor: 'transparent',
+    fontSize: 22,
+    fontWeight: '400',
+  },
+  footer: {
+    position: 'absolute',
+    bottom: 30,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+  },
 });
