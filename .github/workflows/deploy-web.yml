@@ -1,0 +1,37 @@
+name: Build and deploy web app
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    name: Build Android App
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - uses: expo/expo-github-action@v5
+        with:
+          expo-version: 3.x
+      - run: yarn install
+      - run: expo build:web
+      - uses: horochx/deploy-via-scp@v1.0.1
+        with:
+          local: web-build
+          remote: web-build-${{ github.run_id }}
+          host: ${{ secrets.SSH_HOST }}
+          user: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+      - uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            mv -f htdocs www-old
+            mv -f web-build-${{ github.run_id }} htdocs 
+            rm -rf www-old 

@@ -1,11 +1,11 @@
-name: Publish to Expo
+name: Build Android App (Expo)
 on:
   push:
     branches:
       - master
 jobs:
   publish:
-    name: Install and publish
+    name: Build Android App
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -18,4 +18,4 @@ jobs:
           expo-username: ${{ secrets.EXPO_USERNAME }}
           expo-password: ${{ secrets.EXPO_PASSWORD }}
       - run: yarn install
-      - run: expo publish
+      - run: expo build:android --generate-keystore
