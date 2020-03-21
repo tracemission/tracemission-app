@@ -4,6 +4,7 @@ import ActionButtons from './ActionButtons';
 import IncidentList from './IncidentList';
 import CurrentTracking from './CurrentTracking';
 import Scanner from '../tracker/Scanner';
+import SampleQRCode from './SampleQRCode';
 
 const Dashboard = props => {
   const { navigate } = props;
@@ -29,7 +30,13 @@ const Dashboard = props => {
           {scannedId ? (
             <CurrentTracking />
           ) : (
-            <ActionButtons setScannerStarted={setScannerStarted}/>
+            <View>
+              {/* QR CODE USAGE TO BE FOUND IN THE SAMPLE FILE*/}
+              <SampleQRCode id="ABC123" />
+              {/* PLEASE USE IT AS SHOWCASED IN THE FILE, DO NOT IMPORT THE SAMPLE ITSELF */}
+
+              <ActionButtons setScannerStarted={setScannerStarted}/>
+            </View>
           )}
           <IncidentList />
         </View>
