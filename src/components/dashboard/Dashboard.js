@@ -1,10 +1,14 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Text, View } from 'react-native';
+import StayRegister from './StayRegister';
+import IncidentList from './IncidentList';
 
 const Dashboard = () => {
   return (
     <View>
-      <Text>Just throw the component away if there is a merge conflict.</Text>
+      <Text>Hallo _Vorname_</Text>
+      <StayRegister />
+      <IncidentList />
     </View>
   );
 };
