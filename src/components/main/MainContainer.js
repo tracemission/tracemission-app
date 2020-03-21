@@ -14,7 +14,7 @@ const MainContainer = () => {
   const viewComponent = {
     landing: <Landing navigate={navigate} />,
     registration: <Registration navigate={navigate} />,
-    dashboard: <Dashboard />
+    dashboard: <Dashboard navigate={navigate} />
   }[view];
 
   return (
