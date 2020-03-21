@@ -76,11 +76,14 @@ export default class Scanner extends React.Component {
       type,
       data
     }) => {
-      this.setState({
-        value: data,
-      });
-      if (this.props.onScanned) {
-        this.props.onScanned({ data, type, });
+      const match = data.match(new RegExp(process.env.QR_CODE_PATTERN));
+      if (match && ['id'].map((key) => key in match.groups).every(Boolean)) {
+        this.setState({
+          value: match,
+        });
+        if (this.props.onScanned) {
+          this.props.onScanned({ ...match.groups, data, type, });
+        }
       }
     };
 }

@@ -17,8 +17,7 @@ const Dashboard = props => {
           <Text>Hi</Text>
           <Scanner
             style={StyleSheet.absoluteFillObject}
-            onScanned={id => {
-              debugger;
+            onScanned={({ id }) => {
               setScannedId(id);
               setScannerStarted(false);
             }}
