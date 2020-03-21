@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import i18n from '../../util/i18n';
 
 export default class Scanner extends React.Component {
   
@@ -35,13 +36,12 @@ export default class Scanner extends React.Component {
         const { hasPermission, value } = this.state
         if (hasPermission === null) {
             return (
-              <Text>We need your permission to access the camera to scan codes.</Text>
+              <Text>{i18n.t('SCANNER.GIVE_PERMISSION', { title: i18n.t('TITLE') })}</Text>
             );
         } else if (hasPermission === false) {
             return (
               <Text>
-                Please go to your device settings to your device settings and grant
-                Camera permissions to this app.
+                {i18n.t('SCANNER.GRANT_PERMISSION_IN_SETTINGS', { title: i18n.t('TITLE') })}
               </Text>
             );
         } else {
@@ -62,7 +62,7 @@ export default class Scanner extends React.Component {
                 <View style={styles.bottomRightCorner} />
 
                 <View style={styles.header}>
-                  <Text style={styles.headerText}>Scan QR Code</Text>
+                  <Text style={styles.headerText}>{i18n.t('SCANNER.SCAN_LOCATION')}</Text>
                 </View>
 
                 <View style={styles.footer}>
