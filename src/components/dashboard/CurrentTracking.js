@@ -9,7 +9,7 @@ const CurrentTracking = () => {
       <Text style={{ fontWeight: 'bold', color: '#788896', fontSize: 30 }}>
         1:33 min
       </Text>
-      <Button title="Aufenthalt Beenden" />
+      {/* <Button title="Aufenthalt Beenden" /> */}
     </View>
   );
 };

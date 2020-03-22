@@ -39,7 +39,7 @@ const Dashboard = props => {
               navigate={navigate}
             />
           )}
-          <CurrentTracking />
+          {/* <CurrentTracking /> */}
           <IncidentList />
         </View>
       )}
