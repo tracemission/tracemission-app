@@ -39,7 +39,7 @@ const ActionButtons = props => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginVertical: 16
+    paddingVertical: 16
   },
   subtitle: {
     fontWeight: 'bold',

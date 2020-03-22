@@ -33,7 +33,7 @@ const MainContainer = props => {
         setToken={setToken}
       />
     ),
-    profile: <Profile />
+    profile: <Profile navigate={navigate} userData={userData} />
   }[view];
 
   return (
