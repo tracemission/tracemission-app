@@ -27,7 +27,7 @@ jobs:
       - uses: appleboy/scp-action@master
         with:
           source: web-build
-          target: web-build-${{ github.run_id }}
+          target: web-build-customer-${{ github.run_id }}
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -40,5 +40,5 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             mv -f htdocs www-old
-            mv -f web-build-${{ github.run_id }} htdocs 
+            mv -f web-build-customer-${{ github.run_id }} htdocs 
             rm -rf www-old 
