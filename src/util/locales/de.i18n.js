@@ -45,6 +45,13 @@ export default {
       TITLE: 'Gemeldete Fälle',
       NO_ENTRIES:
         'Glücklicherweise wurden in unserer App bisher keine Corona-Fälle gemeldet, mit denen du in Kontakt warst.'
+    },
+    ACTIVE_TRACKING: {
+      QR_CODE_IDENTIFIED: 'QR Code erkannt',
+      START_TRACKING: 'AUFENTHALT STARTEN',
+      STOP_TRACKING: 'AUFENTHALT BEENDEN',
+      YOU_ARE_REGISTERED: 'Sie sind nun hier',
+      AS_GUEST: 'als Gast registriert'
     }
   }
 };
