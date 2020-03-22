@@ -1,10 +1,11 @@
 import React from 'react';
 import QRCode from 'react-native-qrcode-svg';
 import logo from '../../../assets/icon.png';
+import env from '../../util/env';
 
 const QRCodeDisplay = props => {
   const { id } = props;
-  const placeholder = process.env.QR_CODE_CONTENT;
+  const placeholder = env.QR_CODE_CONTENT;
   return (
     <QRCode
       value={placeholder.replace('%id', id)}

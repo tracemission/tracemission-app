@@ -30,8 +30,29 @@ const App = () => {
     setReady(true);
   };
 
+  const containers = {
+    customer: (
+      <CustomerContainer
+        userData={userData}
+        setUserData={setUserData}
+        token={token}
+        setToken={setToken}
+        style={{ flex: 1 }}
+      />
+    ),
+    store: (
+      <StoreContainer
+        userData={userData}
+        setUserData={setUserData}
+        token={token}
+        setToken={setToken}
+        style={{ flex: 1 }}
+      />
+    )
+  };
+
   return ready ? (
-    <ThemeContext.Provider value={getTheme(uiTheme)}>
+    <ThemeContext.Provider value={getTheme(uiTheme[env.VARIANT])}>
       <KeyboardAvoidingView
         behavior="height"
         style={StyleSheet.absoluteFillObject}

@@ -4,6 +4,7 @@ import i18n from '../../util/i18n';
 import superagent from 'superagent';
 import InputField from './InputField';
 import { Button } from 'react-native-material-ui';
+import env from '../../util/env';
 
 const Verification = props => {
   const { navigate, userData, setToken } = props;
@@ -12,14 +13,15 @@ const Verification = props => {
   const onSubmit = async () => {
     navigate('dashboard');
     // superagent
-    //   .post(
-    //     `${process.env.BASE_URL}/person/${userData.id}/verify/${verificationCode}`
-    //   )
+    //   .post(`${env.BASE_URL}/person/${userData.id}/verify/${verificationCode}`)
     //   .set('Accept', 'application/json')
     //   .then(async res => {
-    //     if (res && res.token) {
-    //       setToken(res.token);
+    //     console.log(res);
+    //     if (res && res.body.access_token) {
+    //       setToken(res.body.access_token);
     //       navigate('dashboard');
+    //     } else {
+    //       alert('Invalid code.');
     //     }
     //   })
     //   .catch(err => {
@@ -29,9 +31,9 @@ const Verification = props => {
   };
 
   const onRetry = async () => {
-    console.log(`${process.env.BASE_URL}/person/${userData.id}/verify`);
+    console.log(`${env.BASE_URL}/person/${userData.id}/verify`);
     superagent
-      .post(`${process.env.BASE_URL}/person/${userData.id}/verify`)
+      .post(`${env.BASE_URL}/person/${userData.id}/verify`)
       .set('Accept', 'application/json')
       .then(async res => {
         alert(i18n.t('VERIFICATION.RETRY_SUCCESS'));
