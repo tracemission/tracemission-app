@@ -12,29 +12,41 @@ import env from './src/util/env';
 i18n.init();
 const App = () => {
   const [ready, setReady] = useState(false);
-  const [userId, setUserId] = useState();
+  const [userData, setUserData] = useState();
   const [token, setToken] = useState();
 
   useEffect(() => {
-    asyncInit(setUserId).then(() => {
-      setReady(true);
+    asyncInit();
+  }, []);
+
+  const asyncInit = async () => {
+    await Font.loadAsync({
+      'roboto-regular': require('./assets/fonts/Roboto-Regular.ttf'),
+      'roboto-light': require('./assets/fonts/Roboto-Light.ttf')
     });
-  });
+    const userData = await loadUserInfo(setUserData);
+    setUserData(userData);
+    setReady(true);
+  };
 
   const containers = {
-    customer: (<CustomerContainer
-      userId={userId}
-      setUserId={setUserId}
-      token={token}
-      setToken={setToken}
-    />),
-    store: (<StoreContainer
-      userId={userId}
-      setUserId={setUserId}
-      token={token}
-      setToken={setToken}
-    />),
-  }
+    customer: (
+      <CustomerContainer
+        userData={userData}
+        setUserData={setUserData}
+        token={token}
+        setToken={setToken}
+      />
+    ),
+    store: (
+      <StoreContainer
+        userData={userData}
+        setUserData={setUserData}
+        token={token}
+        setToken={setToken}
+      />
+    )
+  };
 
   return ready ? (
     <ThemeContext.Provider value={getTheme(uiTheme[env.VARIANT])}>
@@ -43,18 +55,7 @@ const App = () => {
   ) : null;
 };
 
-const asyncInit = async setUserId => {
-  await Promise.all([
-    Font.loadAsync({
-      'roboto-regular': require('./assets/fonts/Roboto-Regular.ttf'),
-      'roboto-light': require('./assets/fonts/Roboto-Light.ttf')
-    }),
-    loadUserInfo(setUserId)
-  ]);
-  return Promise.resolve();
-};
-
-const loadUserInfo = async setUserId => {
+const loadUserInfo = async () => {
   return new Promise(async (resolve, reject) => {
     // TODO: Check initial token
 
@@ -64,9 +65,8 @@ const loadUserInfo = async setUserId => {
       superagent
         .get(`${env.BASE_URL}/person/${userId}`)
         .then(res => {
-          console.log(res);
-          setUserId(userId);
-          return resolve();
+          console.log(res.body);
+          return resolve(res.body);
         })
         .catch(err => {
           console.log(err);

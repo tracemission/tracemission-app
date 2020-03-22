@@ -30,5 +30,20 @@ export default {
     LABEL: 'Bestätigungscode',
     SUBMIT: 'Registrierung abschließen',
     RETRY: 'Erneut senden'
+  },
+  DASHBOARD: {
+    TITLE: 'Willkommen, %{name}',
+    INTRO:
+      'Schön, dass du der Mission beitrittst, gemeinsam mit uns mehr Transparenz in die alltäglichen Kontakte zu bringen. Das sorgt für mehr Sicherheit für dich und deine Mitmenschen',
+    TRACKING: {
+      TITLE: 'Aufenthalt verzeichnen',
+      SCANNER: 'Aufenthalt registrieren',
+      CODE: 'Meine ID'
+    },
+    INCIDENTS: {
+      TITLE: 'Gemeldete Fälle',
+      NO_ENTRIES:
+        'Glücklicherweise wurden in unserer App bisher keine Corona-Fälle gemeldet, mit denen du in Kontakt warst.'
+    }
   }
 };

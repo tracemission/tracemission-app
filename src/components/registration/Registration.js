@@ -8,7 +8,7 @@ import { setItem } from '../../util/StorageService';
 import env from '../../util/env';
 
 const Registration = props => {
-  const { navigate, setUserId } = props;
+  const { navigate, setUserData } = props;
   const [input, setInput] = useState({
     firstName: 'Mr',
     lastName: 'Frontend',
@@ -32,7 +32,7 @@ const Registration = props => {
       .then(async res => {
         if (res && res.status === 200 && res.body && res.body.id) {
           await setItem('userId', res.body.id);
-          setUserId(res.body.id);
+          setUserData(res.body);
           navigate('verification');
         }
       })
