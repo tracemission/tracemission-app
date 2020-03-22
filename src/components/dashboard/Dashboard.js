@@ -32,14 +32,13 @@ const Dashboard = props => {
           </Text>
           <Text style={styles.infoText}>{i18n.t('DASHBOARD.INTRO')}</Text>
           {scannedId ? (
-            <CurrentTracking />
+            <CurrentTracking setScannedId={setScannedId}/>
           ) : (
             <ActionButtons
               setScannerStarted={setScannerStarted}
               navigate={navigate}
             />
           )}
-          {/* <CurrentTracking /> */}
           <IncidentList />
         </View>
       )}

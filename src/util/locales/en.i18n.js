@@ -22,4 +22,11 @@ export default {
     GRANT_PERMISSION_IN_SETTINGS: 'Please go to your device settings and grant Camera permissions to the "%{title}" app.',
     SCAN_LOCATION: 'Scan a location',
   },
+  ACTIVE_TRACKING: {
+    QR_CODE_IDENTIFIED: 'QR Code identified',
+    START_TRACKING: 'START VISIT',
+    STOP_TRACKING: 'END VISIT',
+    YOU_ARE_REGISTERED: 'You are now here',
+    AS_GUEST: 'as Guest registered'
+  }
 };
