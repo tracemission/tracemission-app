@@ -1,11 +1,11 @@
-name: Build and deploy customer web app
+name: Build and deploy store web app
 on:
   push:
     branches:
       - master
 jobs:
   build:
-    name: Build and Deploy Customer Web App
+    name: Build and Deploy Store Web App
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1

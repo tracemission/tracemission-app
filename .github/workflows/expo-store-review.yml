@@ -1,8 +1,8 @@
-name: Expo Customer Review
+name: Expo Store Review
 on: [pull_request]
 jobs:
   publish:
-    name: Install and publish
+    name: Store variant install and publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1

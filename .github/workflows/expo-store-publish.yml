@@ -1,11 +1,11 @@
-name: Publish Customer App to Expo
+name: Publish Store App to Expo
 on:
   push:
     branches:
       - master
 jobs:
   publish:
-    name: Install and publish
+    name: Install and publish store variant
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
