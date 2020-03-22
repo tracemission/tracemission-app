@@ -29,7 +29,8 @@ export default {
     INFO: 'Du erhälst in Kürze eine SMS mit einem Bestätigungscode von uns',
     LABEL: 'Bestätigungscode',
     SUBMIT: 'Registrierung abschließen',
-    RETRY: 'Erneut senden'
+    RETRY: 'Erneut senden',
+    RETRY_SUCCESS: 'Bestätigungscode wird versendet'
   },
   DASHBOARD: {
     TITLE: 'Willkommen, %{name}',

@@ -7,6 +7,7 @@ import Dashboard from '../dashboard/Dashboard';
 import Verification from '../registration/Verification';
 import { Button } from 'react-native-material-ui';
 import { clearItem } from '../../util/StorageService';
+import Profile from '../profile/Profile';
 
 const MainContainer = props => {
   const { userData, token, setUserData, setToken } = props;
@@ -25,7 +26,14 @@ const MainContainer = props => {
     dashboard: (
       <Dashboard navigate={navigate} userData={userData} token={token} />
     ),
-    verification: <Verification navigate={navigate} userData={userData} />
+    verification: (
+      <Verification
+        navigate={navigate}
+        userData={userData}
+        setToken={setToken}
+      />
+    ),
+    profile: <Profile />
   }[view];
 
   return (

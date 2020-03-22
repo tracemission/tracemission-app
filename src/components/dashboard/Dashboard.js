@@ -34,7 +34,10 @@ const Dashboard = props => {
           {scannedId ? (
             <CurrentTracking />
           ) : (
-            <ActionButtons setScannerStarted={setScannerStarted} />
+            <ActionButtons
+              setScannerStarted={setScannerStarted}
+              navigate={navigate}
+            />
           )}
           <CurrentTracking />
           <IncidentList />
