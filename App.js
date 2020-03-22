@@ -5,7 +5,9 @@ import MainContainer from './src/components/main/MainContainer';
 import { getItem } from './src/util/StorageService';
 import { ThemeContext, getTheme } from 'react-native-material-ui';
 import uiTheme from './src/util/mainStyle';
+import * as i18n from './src/util/i18n';
 
+i18n.init();
 const App = () => {
   const [ready, setReady] = useState(false);
   const [userId, setUserId] = useState();
