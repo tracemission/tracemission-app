@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import * as Font from 'expo-font';
 import superagent from 'superagent';
-import MainContainer from './src/components/main/MainContainer';
+import CustomerContainer from './src/components/main/CustomerContainer';
+import StoreContainer from './src/components/main/StoreContainer';
 import { getItem } from './src/util/StorageService';
 import { ThemeContext, getTheme } from 'react-native-material-ui';
 import uiTheme from './src/util/mainStyle';
@@ -20,14 +21,24 @@ const App = () => {
     });
   });
 
+  const containers = {
+    customer: (<CustomerContainer
+      userId={userId}
+      setUserId={setUserId}
+      token={token}
+      setToken={setToken}
+    />),
+    store: (<StoreContainer
+      userId={userId}
+      setUserId={setUserId}
+      token={token}
+      setToken={setToken}
+    />),
+  }
+
   return ready ? (
-    <ThemeContext.Provider value={getTheme(uiTheme)}>
-      <MainContainer
-        userId={userId}
-        setUserId={setUserId}
-        token={token}
-        setToken={setToken}
-      />
+    <ThemeContext.Provider value={getTheme(uiTheme[env.VARIANT])}>
+      {containers[env.VARIANT]}
     </ThemeContext.Provider>
   ) : null;
 };

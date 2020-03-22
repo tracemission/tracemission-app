@@ -8,7 +8,7 @@ import Verification from '../registration/Verification';
 import { Button } from 'react-native-material-ui';
 import { clearItem } from '../../util/StorageService';
 
-const MainContainer = props => {
+const CustomerContainer = props => {
   const { userId, token, setUserId, setToken } = props;
   const [view, setView] = useState(
     token ? 'dashboard' : userId ? 'verification' : 'landing'
@@ -54,4 +54,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MainContainer;
+export default CustomerContainer;
