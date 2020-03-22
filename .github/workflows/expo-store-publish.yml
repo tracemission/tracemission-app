@@ -1,10 +1,11 @@
-name: Build Customer Android App (Expo)
+name: Publish Customer App to Expo
 on:
-  schedule:
-    - cron: 55 * * * *
+  push:
+    branches:
+      - master
 jobs:
   publish:
-    name: Build Customer Android App
+    name: Install and publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -12,7 +13,7 @@ jobs:
         with:
           node-version: 12.x
       - run: |
-          VARIANT=customer
+          VARIANT=store
           sed -i s/appvariant/${VARIANT}/g app.json
           echo "VERSION=0.${{ github.run_number }}" > .env
           cat configuration/default.env >> .env
@@ -24,4 +25,4 @@ jobs:
           expo-username: ${{ secrets.EXPO_USERNAME }}
           expo-password: ${{ secrets.EXPO_PASSWORD }}
       - run: yarn install
-      - run: expo build:android --generate-keystore
+      - run: expo publish

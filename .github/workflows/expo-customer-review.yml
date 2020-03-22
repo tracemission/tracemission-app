@@ -8,7 +8,7 @@ jobs:
       - uses: actions/checkout@v1
       - run: |
           VARIANT=customer
-          sed -i s/{APP_VARIANT}/${VARIANT}/g app.json
+          sed -i s/appvariant/${VARIANT}/g app.json
           echo "VERSION=0.${{ github.run_number }}" > .env
           cat configuration/default.env >> .env
           cat configuration/${VARIANT}.env >> .env
@@ -22,9 +22,9 @@ jobs:
           expo-username: ${{ secrets.EXPO_USERNAME }}
           expo-password: ${{ secrets.EXPO_PASSWORD }}
       - run: yarn install
-      - run: expo publish --release-channel=pr-${{ github.event.number }}
+      - run: expo publish --release-channel=${{ github.event.number }}
       - uses: unsplash/comment-on-pr@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          msg: Customer App is ready for review, you can [see it here](https://exp.host/@${{ secrets.EXPO_USERNAME }}/customer?release-channel=pr-${{ github.event.number }}).
+          msg: Customer App is ready for review, you can [see it here](https://exp.host/@${{ secrets.EXPO_USERNAME }}/tracemission-customer?release-channel=pr-${{ github.event.number }}).

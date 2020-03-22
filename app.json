@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "tracemission",
-    "slug": "{APP_VARIANT}",
+    "name": "appvariant's tracemission",
+    "slug": "tracemission-appvariant",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -25,11 +25,11 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "app.tracemission.{APP_VARIANT}",
+      "bundleIdentifier": "app.tracemission.appvariant",
       "buildNumber": "1.0.0"
     },
     "android": {
-      "package": "app.tracemission.{APP_VARIANT}",
+      "package": "app.tracemission.appvariant",
       "versionCode": 1
     }
   }

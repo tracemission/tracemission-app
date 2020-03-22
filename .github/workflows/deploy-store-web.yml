@@ -16,7 +16,7 @@ jobs:
         with:
           expo-version: 3.x
       - run: |
-          VARIANT=customer
+          VARIANT=store
           sed -i s/appvariant/${VARIANT}/g app.json
           echo "VERSION=0.${{ github.run_number }}" > .env
           cat configuration/default.env >> .env
@@ -39,6 +39,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            mv -f htdocs www-old
-            mv -f web-build-${{ github.run_id }} htdocs 
-            rm -rf www-old 
+            mv -f htdocs www-store-old
+            mv -f web-build-${{ github.run_id }} htdocs-store 
+            rm -rf www-store-old 
