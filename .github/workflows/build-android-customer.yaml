@@ -13,7 +13,7 @@ jobs:
           node-version: 12.x
       - run: |
           sed -i s/{APP_VARIANT}/customer/g app.json
-          echo "VERSION=0.${{ github.run_id }}" > .env
+          echo "VERSION=0.${{ github.run_number }}" > .env
           cat configuration/default.env >> .env
           cat configuration/customer.env >> .env
       - uses: expo/expo-github-action@v5
