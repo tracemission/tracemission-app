@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import i18n from '../../util/i18n';
 import { Text, View, StyleSheet } from 'react-native';
 import ActionButtons from './ActionButtons';
 import IncidentList from './IncidentList';
@@ -6,15 +7,14 @@ import CurrentTracking from './CurrentTracking';
 import Scanner from '../tracker/Scanner';
 
 const Dashboard = props => {
-  const { navigate } = props;
+  const { navigate, userData } = props;
   const [scannerStarted, setScannerStarted] = useState(false);
   const [scannedId, setScannedId] = useState(false);
 
   return (
-    <View style={StyleSheet.absoluteFillObject}>
+    <View style={[StyleSheet.absoluteFillObject, styles.bg]}>
       {scannerStarted ? (
         <View style={StyleSheet.absoluteFillObject}>
-          <Text>Hi</Text>
           <Scanner
             style={StyleSheet.absoluteFillObject}
             onScanned={({ id }) => {
@@ -25,11 +25,16 @@ const Dashboard = props => {
         </View>
       ) : (
         <View style={styles.container}>
-          <Text style={{fontWeight: 'bold', fontSize: 30}}>Hallo _Vorname_</Text>
+          <Text style={styles.title}>
+            {i18n.t('DASHBOARD.TITLE', {
+              name: userData.firstName
+            })}
+          </Text>
+          <Text style={styles.infoText}>{i18n.t('DASHBOARD.INTRO')}</Text>
           {scannedId ? (
             <CurrentTracking />
           ) : (
-            <ActionButtons setScannerStarted={setScannerStarted}/>
+            <ActionButtons setScannerStarted={setScannerStarted} />
           )}
           <CurrentTracking />
           <IncidentList />
@@ -40,12 +45,22 @@ const Dashboard = props => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      paddingHorizontal: 10,
-      marginVertical: 30,
-      width: '100%'
-    }
-  });
+  bg: {
+    backgroundColor: '#E5E5E5'
+  },
+  container: {
+    flex: 1,
+    paddingHorizontal: 16,
+    paddingTop: 48,
+    width: '100%'
+  },
+  title: {
+    fontSize: 24
+  },
+  infoText: {
+    marginTop: 32,
+    marginBottom: 32
+  }
+});
 
 export default Dashboard;
