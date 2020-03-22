@@ -1,4 +1,4 @@
-name: Expo Review
+name: Expo Customer Review
 on: [pull_request]
 jobs:
   publish:
@@ -14,10 +14,15 @@ jobs:
           expo-version: 3.x
           expo-username: ${{ secrets.EXPO_USERNAME }}
           expo-password: ${{ secrets.EXPO_PASSWORD }}
+      - run: |
+          sed -i s/{APP_VARIANT}/customer/g app.json
+          echo "VERSION=0.${{ github.run_id }}" > .env
+          cat configuration/default.env >> .env
+          cat configuration/customer.env >> .env
       - run: yarn install
       - run: expo publish --release-channel=pr-${{ github.event.number }}
       - uses: unsplash/comment-on-pr@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          msg: App is ready for review, you can [see it here](https://exp.host/@${{ secrets.EXPO_USERNAME }}/store?release-channel=pr-${{ github.event.number }}).
+          msg: Customer App is ready for review, you can [see it here](https://exp.host/@${{ secrets.EXPO_USERNAME }}/store?release-channel=pr-${{ github.event.number }}).

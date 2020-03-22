@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "tracemission",
-    "slug": "customer",
+    "slug": "{APP_VARIANT}",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
