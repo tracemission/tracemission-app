@@ -46,12 +46,12 @@ const CustomerContainer = props => {
       >
         {viewComponent}
       </LinearGradient>
-      <Button
+      {__DEV__ ? (<Button
         onPress={() => {
           clearItem('userId');
         }}
         text={'[DEV] Clear storage'}
-      />
+      />) : ''}
     </View>
   );
 };
