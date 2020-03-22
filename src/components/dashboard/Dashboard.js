@@ -18,7 +18,8 @@ const Dashboard = props => {
           <Scanner
             style={StyleSheet.absoluteFillObject}
             onScanned={({ id }) => {
-              setScannedId(id);
+              console.log(id);
+              setScannedId(true);
               setScannerStarted(false);
             }}
           />
@@ -32,7 +33,7 @@ const Dashboard = props => {
           </Text>
           <Text style={styles.infoText}>{i18n.t('DASHBOARD.INTRO')}</Text>
           {scannedId ? (
-            <CurrentTracking setScannedId={setScannedId}/>
+            <CurrentTracking setScannedId={setScannedId} />
           ) : (
             <ActionButtons
               setScannerStarted={setScannerStarted}

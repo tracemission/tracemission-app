@@ -1,6 +1,6 @@
 import React from 'react';
 import QRCode from 'react-native-qrcode-svg';
-import logo from '../../../assets/icon.png';
+import logo from '../../../assets/smallIcon.png';
 import env from '../../util/env';
 
 const QRCodeDisplay = props => {
@@ -11,12 +11,11 @@ const QRCodeDisplay = props => {
       value={placeholder.replace('%id', id)}
       logo={logo}
       logoSize={60}
-      logoBackgroundColor="#3351CE"
+      logoBackgroundColor="white"
       color="black"
       backgroundColor="white"
-      size={200}
-      logoMargin={10}
-      logoBorderRadius={10}
+      size={300}
+      logoBorderRadius={0}
       quietZone={10}
     />
   );

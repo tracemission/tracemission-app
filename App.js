@@ -72,6 +72,7 @@ const loadUserInfo = async () => {
     const userId = await getItem('userId');
     if (userId) {
       // Validate user id
+      console.log(`${env.BASE_URL}/person/${userId}`);
       superagent
         .get(`${env.BASE_URL}/person/${userId}`)
         .then(res => {

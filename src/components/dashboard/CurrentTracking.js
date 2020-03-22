@@ -9,58 +9,72 @@ const CurrentTracking = props => {
   const endOnPress = () => {
     setScannedId(false);
     setVisitStarted(false);
-  }
+  };
 
   return (
     <View style={styles.wrapper}>
       <Text style={styles.subtitle}>{i18n.t('DASHBOARD.TRACKING.TITLE')}</Text>
-      
+
       {visitStarted ? (
-        
         <View style={styles.cardWrapper}>
-        <View style={styles.card}>
-          <Image
-            source={require('../../../assets/signedIn.png')}
-            style={styles.icon}
-          />
-            <Text>{i18n.t('ACTIVE_TRACKING.YOU_ARE_REGISTERED')}</Text>
-            <Text style={{ fontWeight: 'bold', fontSize: 25 }}>Starbucks Cafe {'\n'} München Hbf</Text>
-            <Text>{i18n.t('ACTIVE_TRACKING.AS_GUEST')}</Text>
-        </View> 
-        <TouchableOpacity style={styles.buttonAfter} onPress={() => endOnPress()}>
-          <Text style={styles.buttonTextAfter}>{i18n.t('ACTIVE_TRACKING.STOP_TRACKING')}</Text>
-        </TouchableOpacity>
-      </View>
-      ) : ( 
+          <View style={styles.card}>
+            <Image
+              source={require('../../../assets/signedIn.png')}
+              style={styles.icon}
+            />
+            <Text>
+              {i18n.t('DASHBOARD.ACTIVE_TRACKING.YOU_ARE_REGISTERED')}
+            </Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 25 }}>
+              Starbucks Cafe {'\n'} München Hbf
+            </Text>
+            <Text>{i18n.t('DASHBOARD.ACTIVE_TRACKING.AS_GUEST')}</Text>
+          </View>
+          <TouchableOpacity
+            style={styles.buttonAfter}
+            onPress={() => endOnPress()}
+          >
+            <Text style={styles.buttonTextAfter}>
+              {i18n.t('DASHBOARD.ACTIVE_TRACKING.STOP_TRACKING')}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
         <View style={styles.cardWrapper}>
           <View style={styles.card}>
             <Image
               source={require('../../../assets/scanApproved.png')}
               style={styles.icon}
             />
-              <Text style={{ fontWeight: 'bold', fontSize: 25 }}>{i18n.t('ACTIVE_TRACKING.QR_CODE_IDENTIFIED')}</Text>
-              <Text>Starbucks Cafe München Hbf</Text>
-          </View> 
-          <TouchableOpacity style={styles.buttonBefore} onPress={() => setVisitStarted(true)}>
-            <Text style={styles.buttonTextBefore}>{i18n.t('ACTIVE_TRACKING.START_TRACKING')}</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 25 }}>
+              {i18n.t('DASHBOARD.ACTIVE_TRACKING.QR_CODE_IDENTIFIED')}
+            </Text>
+            <Text>Starbucks Cafe München Hbf</Text>
+          </View>
+          <TouchableOpacity
+            style={styles.buttonBefore}
+            onPress={() => setVisitStarted(true)}
+          >
+            <Text style={styles.buttonTextBefore}>
+              {i18n.t('DASHBOARD.ACTIVE_TRACKING.START_TRACKING')}
+            </Text>
           </TouchableOpacity>
         </View>
       )}
-      
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   wrapper: {
-    paddingVertical: 16, 
-    alignItems:'center',
+    paddingVertical: 16,
+    alignItems: 'center',
     justifyContent: 'flex-end',
     width: '100%'
   },
   cardWrapper: {
-    paddingVertical: 16, 
-    alignItems:'center',
+    paddingVertical: 16,
+    alignItems: 'center',
     justifyContent: 'flex-end',
     width: '100%'
   },
@@ -77,7 +91,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingVertical: 16,
     justifyContent: 'center',
-    alignItems:'center',
+    alignItems: 'center',
     paddingBottom: 35
   },
   icon: {
