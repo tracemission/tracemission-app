@@ -7,11 +7,12 @@ import Dashboard from '../dashboard/Dashboard';
 import Verification from '../registration/Verification';
 import { Button } from 'react-native-material-ui';
 import { clearItem } from '../../util/StorageService';
+import Profile from '../profile/Profile';
 
 const CustomerContainer = props => {
-  const { userId, token, setUserId, setToken } = props;
+  const { userData, token, setUserData, setToken } = props;
   const [view, setView] = useState(
-    token ? 'dashboard' : userId ? 'verification' : 'landing'
+    token ? 'dashboard' : userData ? 'verification' : 'landing'
   );
   const navigate = destination => {
     setView(destination);
@@ -19,9 +20,20 @@ const CustomerContainer = props => {
 
   const viewComponent = {
     landing: <Landing navigate={navigate} />,
-    registration: <Registration navigate={navigate} setUserId={setUserId} />,
-    dashboard: <Dashboard navigate={navigate} userId={userId} token={token} />,
-    verification: <Verification navigate={navigate} userId={userId} />
+    registration: (
+      <Registration navigate={navigate} setUserData={setUserData} />
+    ),
+    dashboard: (
+      <Dashboard navigate={navigate} userData={userData} token={token} />
+    ),
+    verification: (
+      <Verification
+        navigate={navigate}
+        userData={userData}
+        setToken={setToken}
+      />
+    ),
+    profile: <Profile navigate={navigate} userData={userData} />
   }[view];
 
   return (
