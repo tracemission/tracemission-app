@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 
 const ActionButtons = props => {
-  const { setScannerStarted } = props;
+  const { setScannerStarted, navigate } = props;
 
   return (
     <View style={styles.wrapper}>
@@ -22,7 +22,7 @@ const ActionButtons = props => {
           </TouchableOpacity>
         </View>
         <View style={styles.card}>
-          <TouchableOpacity onPress={() => alert('Sup?')}>
+          <TouchableOpacity onPress={() => navigate('profile')}>
             <Image
               source={require('../../../assets/code.png')}
               style={styles.icon}
