@@ -13,7 +13,7 @@ const QRCodeDisplay = props => {
       logoBackgroundColor="#3351CE"
       color="black"
       backgroundColor="white"
-      size={300}
+      size={200}
       logoMargin={10}
       logoBorderRadius={10}
       quietZone={10}

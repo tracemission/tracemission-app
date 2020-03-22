@@ -58,6 +58,7 @@ const Verification = props => {
           style={{ container: styles.submit }}
           raised
           primary
+          disabled={verificationCode.length === 0}
           text={i18n.t('VERIFICATION.SUBMIT')}
         />
         <Button onPress={() => onRetry()} text={i18n.t('VERIFICATION.RETRY')} />

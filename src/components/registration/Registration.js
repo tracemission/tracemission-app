@@ -80,6 +80,7 @@ const Registration = props => {
             onPress={() => onSubmit()}
             raised
             primary
+            disabled={!isInputComplete()}
             text={i18n.t('REGISTRATION.SUBMIT')}
           />
         </View>
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
     marginBottom: 32
   },
   card: {
-    flex: 0.8,
+    flex: 0,
     width: '90%',
     backgroundColor: '#FFFFFF',
     alignSelf: 'center',

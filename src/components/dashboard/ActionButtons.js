@@ -13,7 +13,7 @@ const ActionButtons = props => {
         <View style={styles.card}>
           <TouchableOpacity onPress={() => setScannerStarted(true)}>
             <Image
-              source={require('../../../assets/scanner.png')}
+              source={require('../../../assets/scanx3.png')}
               style={styles.icon}
             />
             <Text style={styles.buttonLabel}>
@@ -24,7 +24,7 @@ const ActionButtons = props => {
         <View style={styles.card}>
           <TouchableOpacity onPress={() => navigate('profile')}>
             <Image
-              source={require('../../../assets/code.png')}
+              source={require('../../../assets/IDx3.png')}
               style={styles.icon}
             />
             <Text style={styles.buttonLabel}>
@@ -65,6 +65,8 @@ const styles = StyleSheet.create({
   },
   icon: {
     alignSelf: 'center',
+    width: 64,
+    height: 64,
     marginBottom: 8
   },
   buttonLabel: {

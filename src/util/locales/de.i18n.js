@@ -46,5 +46,8 @@ export default {
       NO_ENTRIES:
         'Glücklicherweise wurden in unserer App bisher keine Corona-Fälle gemeldet, mit denen du in Kontakt warst.'
     }
+  },
+  PROFILE: {
+    REPORT: 'Krankheitsfall melden'
   }
 };

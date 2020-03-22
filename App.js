@@ -8,6 +8,7 @@ import { ThemeContext, getTheme } from 'react-native-material-ui';
 import uiTheme from './src/util/mainStyle';
 import * as i18n from './src/util/i18n';
 import env from './src/util/env';
+import { KeyboardAvoidingView, StyleSheet, ScrollView } from 'react-native';
 
 i18n.init();
 const App = () => {
@@ -29,28 +30,16 @@ const App = () => {
     setReady(true);
   };
 
-  const containers = {
-    customer: (
-      <CustomerContainer
-        userData={userData}
-        setUserData={setUserData}
-        token={token}
-        setToken={setToken}
-      />
-    ),
-    store: (
-      <StoreContainer
-        userData={userData}
-        setUserData={setUserData}
-        token={token}
-        setToken={setToken}
-      />
-    )
-  };
-
   return ready ? (
-    <ThemeContext.Provider value={getTheme(uiTheme[env.VARIANT])}>
-      {containers[env.VARIANT]}
+    <ThemeContext.Provider value={getTheme(uiTheme)}>
+      <KeyboardAvoidingView
+        behavior="height"
+        style={StyleSheet.absoluteFillObject}
+      >
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          {containers[env.VARIANT]}
+        </ScrollView>
+      </KeyboardAvoidingView>
     </ThemeContext.Provider>
   ) : null;
 };

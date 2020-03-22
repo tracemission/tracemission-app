@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import i18n from '../../util/i18n';
+import { View, StyleSheet, Text } from 'react-native';
 import QRCodeDisplay from '../tracker/QRCodeDisplay';
 import { Button } from 'react-native-material-ui';
 
@@ -14,7 +15,18 @@ const Profile = props => {
         text=""
       />
       <View style={styles.container}>
-        <QRCodeDisplay style={styles.code} id={userData.id} />
+        <Text style={styles.name}>
+          {userData.firstName} {userData.lastName}
+        </Text>
+        <Text>{userData.id}</Text>
+        <View style={styles.qr}>
+          <QRCodeDisplay id={userData.id} />
+        </View>
+        <Button
+          raised
+          style={{ container: styles.reportButton }}
+          text={i18n.t('PROFILE.REPORT')}
+        />
       </View>
     </View>
   );
@@ -29,11 +41,20 @@ const styles = StyleSheet.create({
     width: 64,
     alignSelf: 'flex-end'
   },
-  container: {
-    alignItems: 'center'
+  reportButton: {
+    borderColor: '#F92968',
+    borderWidth: 2
   },
-  code: {
-    alignSelf: 'center'
+  name: {
+    fontWeight: 'bold'
+  },
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1
+  },
+  qr: {
+    marginVertical: 32
   }
 });
 
