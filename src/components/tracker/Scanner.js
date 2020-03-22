@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import i18n from '../../util/i18n';
+import env from '../../util/env';
 
 export default class Scanner extends React.Component {
   
@@ -76,7 +77,7 @@ export default class Scanner extends React.Component {
       type,
       data
     }) => {
-      const match = data.match(new RegExp(process.env.QR_CODE_PATTERN));
+      const match = data.match(new RegExp(env.QR_CODE_PATTERN));
       if (match && ['id'].map((key) => key in match.groups).every(Boolean)) {
         this.setState({
           value: match,

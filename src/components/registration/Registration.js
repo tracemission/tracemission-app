@@ -5,6 +5,7 @@ import { Button } from 'react-native-material-ui';
 import InputField from './InputField';
 import superagent from 'superagent';
 import { setItem } from '../../util/StorageService';
+import env from '../../util/env';
 
 const Registration = props => {
   const { navigate, setUserId } = props;
@@ -25,7 +26,7 @@ const Registration = props => {
       return;
     }
     superagent
-      .post(`${process.env.BASE_URL}/person`)
+      .post(`${env.BASE_URL}/person`)
       .send(input)
       .set('Accept', 'application/json')
       .then(async res => {

@@ -6,6 +6,7 @@ import { getItem } from './src/util/StorageService';
 import { ThemeContext, getTheme } from 'react-native-material-ui';
 import uiTheme from './src/util/mainStyle';
 import * as i18n from './src/util/i18n';
+import env from './src/util/env';
 
 i18n.init();
 const App = () => {
@@ -50,7 +51,7 @@ const loadUserInfo = async setUserId => {
     if (userId) {
       // Validate user id
       superagent
-        .get(`${process.env.BASE_URL}/person/${userId}`)
+        .get(`${env.BASE_URL}/person/${userId}`)
         .then(res => {
           console.log(res);
           setUserId(userId);
