@@ -56,6 +56,8 @@ A Linking Invitation consists of a Tracemission Container containing the Tracemi
 With the Tracemission Link, the contact between two Tracemission Items is documented. It is stored locally on the Tracemission App that manages each affected Tracemission Item. Beneath the local Tracemission Item, the encrypted foreign Tracemission Item as well as the associated Tracemission ID and the timestamp for the contact are stored together with the Tracemission Link. Depending on the Link Type, further meta information could get supplied.
 
 ## Processes
+![Flow Charts for the processes](./sttep-processes.jpeg)
+
 ### Registration
 During the registration, a new Tracemission Item is created on a (fresh or existing) Tracemission App instance. It is filled by the individual creating it with sensitive contact data. The requirements for those data might be defined by the Tracemission App itself. During the creation, the Tracemission App requests a new Tracemission ID from a Tracemission Edge Space. The Tracemission Edge Space to be used to request the ID  from COULD be freely chosen in favor of the Tracemission App. It MAY be e.g. predefined, (randomly) selected from a list, supplied by the user or proposed by the Tracemission Central.
 
@@ -103,4 +105,5 @@ Well-defined time slots REQUIRE a user to check-out on leaving a Location. There
 - What about security?
 - Handle path/graph requests?
 - How to handle outdated data?
+- Possible use case for Blockchain?
 - How to handle deletion requests?
