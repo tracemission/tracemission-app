@@ -19,6 +19,8 @@ Check it out:
 - [Our web](https://tracemission.app)
 
 # Builds
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tracemission_tracemission-app&metric=alert_status)](https://sonarcloud.io/dashboard?id=tracemission_tracemission-app)
+
 To run it on your device, install the Expo client [for iOS](https://itunes.apple.com/app/apple-store/id982107779) or [for Android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www) and scan the code on our latest build pages.
 
 ## Customer App
