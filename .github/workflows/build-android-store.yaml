@@ -1,7 +1,7 @@
 name: Build Store Android App (Expo)
 on:
-  schedule:
-    - cron: 25 * * * *
+  release:
+    types: [published]
 jobs:
   publish:
     name: Build Store Android App
