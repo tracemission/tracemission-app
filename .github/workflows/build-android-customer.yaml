@@ -1,7 +1,7 @@
 name: Build Customer Android App (Expo)
 on:
-  schedule:
-    - cron: 55 * * * *
+  release:
+    types: [published]
 jobs:
   publish:
     name: Build Customer Android App
